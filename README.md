@@ -63,4 +63,8 @@
 
 - Use `php artisan make:model`, `make:controller`, etc. to extend
 - To add product image uploads, see Laravel file upload docs
+<<<<<<< HEAD
 - Extendable by adding new models or features per Laravel best practices
+=======
+- Extendable by adding new models or features per Laravel best practices
+>>>>>>> 987e681296de912575dc73759ac50b9b6e3c653f
