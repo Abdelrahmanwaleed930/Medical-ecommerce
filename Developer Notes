@@ -1,0 +1,75 @@
+## Developer Documentation
+
+### Project Structure
+
+- **app/Http/Controllers/**  
+  Contains all controllers (public, admin, API).  
+  - `Admin/`: Controllers for admin dashboard (products, orders, logs, etc).
+- **app/Models/**  
+  Eloquent models (e.g., `Product`, `Category`, `ProductLog`, `Order`, etc).
+- **app/Observers/**  
+  Observers for model events (like `ProductObserver` for logging).
+- **resources/views/**  
+  Blade templates.
+  - `admin/`: Admin panel views (products, orders, logs).
+  - `public/`: Public-facing pages (product list, cart, checkout).
+- **database/migrations/**  
+  Migration files for DB schema.
+- **database/seeders/**  
+  Seeders for test/demo data.
+- **routes/web.php**  
+  All web routes (admin and public).
+
+### Key Components
+
+- **Product Management:**  
+  CRUD for products, with category assignment and optional image.
+- **Order Management:**  
+  CRUD for orders; each order contains multiple products.
+- **Product Logging:**  
+  Every create/update/delete on products is logged in `ProductLog` via `ProductObserver`.
+- **Authentication:**  
+  Laravel Breeze for admin login.
+- **Seed Data:**  
+  Seeders for demo products, categories, admin user.
+
+### How to Extend
+
+- **Add a New Feature (e.g., Brands):**
+  1. Create a model:  
+     `php artisan make:model Brand -m`
+  2. Add migration fields and run:  
+     `php artisan migrate`
+  3. Create controller and resource routes.
+  4. Add Blade views in `resources/views/admin/brands/`.
+  5. Associate products with brands via relationship in `Product` and `Brand` models.
+
+- **Add an Observer:**  
+  1. `php artisan make:observer BrandObserver --model=Brand`
+  2. Register the observer in `AppServiceProvider@boot`.
+
+- **Add API Endpoints:**  
+  1. Add routes in `routes/api.php`.
+  2. Create API controllers in `app/Http/Controllers/Api`.
+  3. Return JSON responses.
+
+- **Add Blade Components:**  
+  1. `php artisan make:component MyComponent`
+  2. Use `<x-my-component />` in your Blade views.
+
+- **Add a Seeder:**  
+  1. `php artisan make:seeder MySeeder`
+  2. Edit and run with  
+     `php artisan db:seed --class=MySeeder`
+
+### Coding Standards
+
+- Follow PSR-12 for PHP.
+- Use Eloquent relationships for data access.
+- Blade for templating.
+- Use factories and seeders for test data.
+- All admin functions are behind authentication middleware.
+
+---
+
+**For more details, see comments in each file or open an issue to ask the maintainers.**
